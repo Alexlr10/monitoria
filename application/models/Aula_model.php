@@ -181,4 +181,27 @@ join aula au USING(id_monitoria) left join frequencia fr on (a.id_aluno = fr.id_
 
         return $result;
     }
+
+
+    public function getRelatorioPlanilha($id_monitoria)
+    {
+        $sql = "SELECT DISTINCT u.id_usuario, u.nome, u.matricula,
+                d.unidade_academica, m.banco,m.agencia, m.conta,
+                CONCAT(DATE_FORMAT(af.data_inicio, '%d/%m/%Y'), \" a \", DATE_FORMAT(af.data_fim, '%d/%m/%Y')) AS data,
+                DATEDIFF(af.data_fim, af.data_inicio) as diferencaData,
+                (SELECT DISTINCT  TIME_FORMAT(SUM(carga_horaria), '%h') as carga_horaria
+                from ( SELECT DISTINCT  SUM(TIMEDIFF(horario_fim,horario_inicio))as carga_horaria
+                from atividade  where id_monitoria = $id_monitoria UNION SELECT DISTINCT SUM(TIMEDIFF(horario_fim,horario_inicio)) as carga_horaria
+                from aula  where id_monitoria = $id_monitoria ) as uniao) as somatorioHorario
+                from usuario u join monitoria m join disciplina d
+                join atestado_frequencia af join aula au join atividade at
+                where u.id_usuario = m.id_monitor and m.id_monitoria = $id_monitoria and m.monitoria_remunerada = 'Sim';";
+
+
+        $Query = $this->db->query($sql, $id_monitoria);
+        $result = $Query->result();
+
+        return $result;
+
+    }
 }

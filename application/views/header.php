@@ -132,9 +132,9 @@ $PERFIL_USUARIO = $this->session->userdata('perfil');
 
                         </ul>
                     </li>
-                    <li><a href="<?=site_url('Usuarios/listar_monitores_planilha')?>"><i class="fa fa-circle-o"></i>Planilha Monitores</a></li>
+                    <li><a href="<?=site_url('Usuarios/listar_monitores_planilha')?>"><i class="fa fa-circle-o"></i><span>Planilha Monitores</span></a></li>
 
-                    <li><a href="<?=site_url('Relatorio/listar_view')?>"><i class="fa fa-calendar-o"></i> Atestado de Frequência</a></li>
+                    <li><a href="<?=site_url('Relatorio/listar_view')?>"><i class="fa fa-calendar-o"></i><span>Atestado de Frequência</span> </a></li>
                     <li><a href="<?=site_url('Usuarios/listar_professor_view')?>"><i class="fa fa-users"></i> <span>Professores</span></a></li>
 
                 <?php } ?>

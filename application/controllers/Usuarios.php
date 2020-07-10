@@ -41,17 +41,28 @@ class Usuarios extends CI_Controller
         if ($PERFIL_USUARIO == "Administrador" or $PERFIL_USUARIO == "Professor") {
             $quant = count($this->Monitoria_model->getMonitoriasLista($PERFIL_USUARIO, $id_usuario));
 
-            //   for ($i = 1; $i <= $quant; $i++) {
+
             //recupera os usuarios do sistema
-            $DATA['monitorias'] = $this->Aula_model->getRelatorioPlanilha(1);
-//                $DATA['monitorias'] =  $list;
-            //     }
-            // $data['monitor'] = $dados['teste'];
+//            $DADOS['monitorias'] = $this->Aula_model->getRelatorioPlanilha(1);
+//            $DADOS['monitorias'] = $this->Aula_model->getRelatorioPlanilha(2);
 
-            var_dump($DATA);
-            //  var_dump($data['monitor']);
+         //   $DADOS['monitorias'] = $this->Aula_model->getAlunoDadosBancarios();
 
-            $this->load->view('planilha/proplan', $DATA);
+            $aula['aula'] = $this->Aula_model->getSomatorioAula();
+            $atividade['atividade'] = $this->Aula_model->getSomatorioAtividade();
+
+            for($i = 1; $i <= $quant; $i++){
+
+                $teste[$i] = $this->Aula_model->getRelatorioPlanilha($i)[0];
+
+
+            }
+            $DADOS['monitorias'] = $teste;
+            var_dump($DADOS);
+
+
+
+            $this->load->view('planilha/proplan', $DADOS);
         } else {
             $this->Util->telaResultado($this, "Acesso negado.", true);
         }

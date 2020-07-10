@@ -39,6 +39,7 @@ $datatablesPortugueseBrasil = $ci->Util_model->datatablesPortugueseBrasil();
                         <tr>
                             <th>Bolsista</th>
                             <th>Matricula</th>
+                            <th>CPF</th>
                             <th>Unid/Curso</th>
                             <th>Banco</th>
                             <th>Agência</th>
@@ -54,6 +55,7 @@ $datatablesPortugueseBrasil = $ci->Util_model->datatablesPortugueseBrasil();
                             <tr>
                                 <td> <?= $usuario->nome ?></td>
                                 <td> <?= $usuario->matricula ?></td>
+                                <td> <?= $usuario->cpf ?></td>
                                 <td><?= $usuario->unidade_academica ?></td>
                                 <td><?= $usuario->banco ?></td>
                                 <td><?= $usuario->agencia ?></td>

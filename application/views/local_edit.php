@@ -68,8 +68,8 @@ if ($PERFIL_USUARIO == "Administrador") {?>
                             </div>
 
                             <div class="form-group">
-                                <label>Dependencias</label>
-                                <input type="text" class="form-control" name="dependencia" placeholder="Digite o nome da dependencia..." value="<?=$local->dependencia?>" required>
+                                <label>Dependencias <i class="fa fa-fw fa-question-circle" title=" Ex: PREDIO II - LAB. ANATOMIA - SALA 40 / PAVILHAO DE AULAS III - SALA 306 "></i> </label>
+                                <input type="text" class="form-control" name="dependencia" placeholder="PREDIO - LABORATORIO - SALA" value="<?=$local->dependencia?>" required>
                             </div>
 
 

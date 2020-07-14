@@ -345,8 +345,10 @@ if ($PERFIL_USUARIO == "Administrador" or $PERFIL_USUARIO == "Professor") {
                                                   value="<?= $monitoria->plano_aula ?>"><?= $monitoria->plano_aula ?></textarea>
                                     </div>
 
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <br>
+
+                                    <div class="form-check" >
+                                        <input type="checkbox" required="true" class="form-check-input" id="exampleCheck1">
                                         <label class="form-check-label" for="exampleCheck1">Certifico que o aluno está
                                             presente e concorda com o plano de aula/monitoria apresentado</label>
                                     </div>

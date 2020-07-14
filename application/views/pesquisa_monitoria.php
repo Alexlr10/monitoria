@@ -74,7 +74,7 @@ $this->load->view('header_site'); ?>
 
                                 <td><?= date('H:i', strtotime($horario->horario_inicio)) . ' - ' . date('H:i', strtotime($horario->horario_fim)) ?></td>
 
-                                <td><?= $horario->sala . ', ' . $horario->predio . ', ' . $horario->campus ?></td>
+                                <td><?= $horario->dependencia ?></td>
 
                             </tr>
                         <?php } ?>

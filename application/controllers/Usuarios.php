@@ -11,6 +11,7 @@ class Usuarios extends CI_Controller
         $this->load->helper('url');
         $this->load->model('Usuario_model', 'Usuario_model');
         $this->load->model('Monitoria_model', 'Monitoria_model');
+        $this->load->model('Aula_model', 'Aula_model');
         $this->load->model('Util_model', 'Util');
     }
 
@@ -28,6 +29,40 @@ class Usuarios extends CI_Controller
             $DATA['alunos'] = $this->Usuario_model->getUsuariosAluno();
 
             $this->load->view('monitores_listar', $DATA);
+        } else {
+            $this->Util->telaResultado($this, "Acesso negado.", true);
+        }
+    }
+
+    function listar_monitores_planilha()
+    {
+        $id_usuario = $this->session->userdata('id_usuario');
+        $PERFIL_USUARIO = $this->session->userdata('perfil');
+        if ($PERFIL_USUARIO == "Administrador" or $PERFIL_USUARIO == "Professor") {
+            $quant = count($this->Monitoria_model->getMonitoriasLista($PERFIL_USUARIO, $id_usuario));
+
+
+            //recupera os usuarios do sistema
+//            $DADOS['monitorias'] = $this->Aula_model->getRelatorioPlanilha(1);
+//            $DADOS['monitorias'] = $this->Aula_model->getRelatorioPlanilha(2);
+
+         //   $DADOS['monitorias'] = $this->Aula_model->getAlunoDadosBancarios();
+
+            $aula['aula'] = $this->Aula_model->getSomatorioAula();
+            $atividade['atividade'] = $this->Aula_model->getSomatorioAtividade();
+
+            for($i = 1; $i <= $quant; $i++){
+
+                $teste[$i] = $this->Aula_model->getRelatorioPlanilha($i)[0];
+
+
+            }
+            $DADOS['monitorias'] = $teste;
+            var_dump($DADOS);
+
+
+
+            $this->load->view('planilha/proplan', $DADOS);
         } else {
             $this->Util->telaResultado($this, "Acesso negado.", true);
         }

@@ -111,15 +111,16 @@ class Home extends CI_Controller
             $request->containstitucional = $containstitucional;
             $request->password = $senha;
 
+
             // Carrega a classe de autenticação
             $authGraphqlRequest = new AuthGraphqlRequest();
 
             // Tenta realizar o login na Conta Institucional
-            $authGraphqlRequest->loginContaInstitucional($request);
+             $authGraphqlRequest->loginContaInstitucional($request);
 
             // Recupera as informações do usuário logado
             // Dados pessoais e vinculos (aluno, docente, tae, coordenador de curso, etc) com a UFVJM
-            //$usuarioLogadoInfo = $authGraphqlRequest->usuarioLogadoInfo();
+            $usuarioLogadoInfo = $authGraphqlRequest->usuarioLogadoInfo();
 
             $DATA = $this->Usuario_model->getUsuarioByContaInstitucional($containstitucional);
 
@@ -155,7 +156,7 @@ class Home extends CI_Controller
                     }
                 } //caso o usuario digitou um matricula  e uma senha e nao esteja no BD envia uma msg de erro
                 elseif (($containstitucional != null || $senha != null) ) {
-                    $DADOS['msg'] = "Usuario ou senha não existe";
+                    $DADOS['msg'] = $errorMessage;
                     $this->load->view('login', $DADOS);
                 } //caso contrario, mostra a tela de login
                 else {
@@ -227,6 +228,11 @@ class Home extends CI_Controller
 
         $this->load->view('pesquisa_monitoria', $DATA);
 
+    }
+    //Função para chamar página em construção
+    function tela_construcao(){
+
+        $this->load->view('tela_construcao');
     }
 
 }

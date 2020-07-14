@@ -229,5 +229,10 @@ class Home extends CI_Controller
         $this->load->view('pesquisa_monitoria', $DATA);
 
     }
+    //Função para chamar página em construção
+    function tela_construcao(){
+
+        $this->load->view('tela_construcao');
+    }
 
 }

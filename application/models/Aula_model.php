@@ -184,17 +184,29 @@ join aula au USING(id_monitoria) left join frequencia fr on (a.id_aluno = fr.id_
 
     public function getRelatorioPlanilha($id_monitoria)
     {
-        $sql = "SELECT DISTINCT u.id_usuario, u.nome, u.matricula,
-                d.unidade_academica, m.banco,m.agencia, m.conta,m.cpf,
-                CONCAT(DATE_FORMAT(af.data_inicio, '%d/%m/%Y'), \" a \", DATE_FORMAT(af.data_fim, '%d/%m/%Y')) AS data,
+//        $sql = "SELECT DISTINCT u.id_usuario, u.nome, u.matricula,
+//                d.unidade_academica, m.banco,m.agencia, m.conta,m.cpf,
+//                CONCAT(DATE_FORMAT(af.data_inicio, '%d/%m/%Y'), \" a \", DATE_FORMAT(af.data_fim, '%d/%m/%Y')) AS data,
+//                DATEDIFF(af.data_fim, af.data_inicio) as diferencaData,
+//                (SELECT DISTINCT  TIME_FORMAT(SUM(carga_horaria), '%h') as carga_horaria
+//                from ( SELECT DISTINCT  SUM(TIMEDIFF(horario_fim,horario_inicio))as carga_horaria
+//                from atividade  where id_monitoria = $id_monitoria UNION SELECT DISTINCT SUM(TIMEDIFF(horario_fim,horario_inicio)) as carga_horaria
+//                from aula  where id_monitoria = $id_monitoria ) as uniao) as somatorioHorario
+//                from usuario u join monitoria m join disciplina d
+//                join atestado_frequencia af join aula au join atividade at
+//                where u.id_usuario = m.id_monitor and m.id_monitoria = $id_monitoria and m.monitoria_remunerada = 'Sim';";
+//
+        $sql = "SELECT DISTINCT u.id_usuario, u.nome, u.matricula,m.cpf,d.unidade_academica, m.banco,m.agencia, m.conta,
+                CONCAT(DATE_FORMAT(af.data_inicio, '%d/%m/%Y'), 'a', DATE_FORMAT(af.data_fim, '%d/%m/%Y')) AS data,
                 DATEDIFF(af.data_fim, af.data_inicio) as diferencaData,
                 (SELECT DISTINCT  TIME_FORMAT(SUM(carga_horaria), '%h') as carga_horaria
                 from ( SELECT DISTINCT  SUM(TIMEDIFF(horario_fim,horario_inicio))as carga_horaria
-                from atividade  where id_monitoria = $id_monitoria UNION SELECT DISTINCT SUM(TIMEDIFF(horario_fim,horario_inicio)) as carga_horaria
-                from aula  where id_monitoria = $id_monitoria ) as uniao) as somatorioHorario
+                from atividade   UNION SELECT DISTINCT SUM(TIMEDIFF(horario_fim,horario_inicio)) as carga_horaria
+                from aula  ) as uniao) as somatorioHorario
                 from usuario u join monitoria m join disciplina d
                 join atestado_frequencia af join aula au join atividade at
-                where u.id_usuario = m.id_monitor and m.id_monitoria = $id_monitoria and m.monitoria_remunerada = 'Sim';";
+                where u.id_usuario = m.id_monitor  and m.monitoria_remunerada = 'Sim';";
+
 
 
         $Query = $this->db->query($sql, $id_monitoria);
@@ -206,13 +218,10 @@ join aula au USING(id_monitoria) left join frequencia fr on (a.id_aluno = fr.id_
 
     public function getSomatorioAtividade()
     {
-        $sql = "SELECT DISTINCT
-              TIME_FORMAT(SUM(TIMEDIFF(at.horario_fim,at.horario_inicio)), '%h : %i')  as somatorio
-                from atividade at  INNER JOIN monitoria m
-                     INNER JOIN usuario u
-                     WHERE at.id_monitoria= m.id_monitoria and u.id_usuario = m.id_monitor
-                     GROUP by m.id_monitoria
-";
+        $sql = "SELECT DISTINCT m.id_monitoria,at.id_monitoria , TIME_FORMAT(SUM(TIMEDIFF(at.horario_fim,at.horario_inicio)), '%h') as somatorio
+                from atividade at join monitoria m
+                where m.id_monitoria = at.id_monitoria
+                GROUP by m.id_monitoria,at.id_monitoria";
 
 
         $Query = $this->db->query($sql);
@@ -224,12 +233,10 @@ join aula au USING(id_monitoria) left join frequencia fr on (a.id_aluno = fr.id_
 
     public function getSomatorioAula()
     {
-        $sql = "SELECT DISTINCT
-             TIME_FORMAT(SUM(TIMEDIFF(a.horario_fim,a.horario_inicio)), '%h : %i')  as somatorio
-                from aula a  INNER JOIN monitoria m
-                     INNER JOIN usuario u
-                     WHERE a.id_monitoria= m.id_monitoria and u.id_usuario = m.id_monitor
-                     GROUP by m.id_monitoria";
+        $sql = "SELECT DISTINCT m.id_monitoria,a.id_monitoria , TIME_FORMAT(SUM(TIMEDIFF(a.horario_fim,a.horario_inicio)), '%h') as somatorio
+                from aula a join monitoria m
+                where m.id_monitoria = a.id_monitoria
+                GROUP by m.id_monitoria,a.id_monitoria";
 
 
         $Query = $this->db->query($sql);

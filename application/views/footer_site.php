@@ -3,8 +3,10 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 0.0.1
     </div>
-      <strong>Copyright © 2020 PET - <a target="_blank" href="https://sites.google.com/view/petestrategias/inicio"> <img src="../imagens/pet.png"  height="40" width="70"> </a> Template by Almsaeed Studio. All rights reserved.Desenv: Alex Lopes, Mateus Amaral e Thales Mota
-    reserved.Desenv: Alex Lopes, Mateus Amaral e Thales Mota
+      <strong>Copyright © 2020 PET - <a target="_blank" href="https://sites.google.com/view/petestrategias/inicio">
+              <img src="../imagens/pet.png"  height="40" width="70"> </a>
+          Template by Almsaeed Studio. All rights reserved.Desenv: Alex Lopes, Mateus Amaral e Thales Mota
+
   </footer>
 </div>
 <!-- ./wrapper -->

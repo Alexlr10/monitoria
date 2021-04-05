@@ -137,10 +137,10 @@ join aula au USING(id_monitoria) left join frequencia fr on (a.id_aluno = fr.id_
     public function somatorioCargaHoraria($id_monitoria)
     {
 
-        $sql = "SELECT DISTINCT  TIME_FORMAT(SUM(carga_horaria), '%h : %i') as carga_horaria
-        from ( SELECT DISTINCT  SUM(TIMEDIFF(horario_fim,horario_inicio))as carga_horaria
-        from atividade  where id_monitoria = $id_monitoria UNION SELECT DISTINCT SUM(TIMEDIFF(horario_fim,horario_inicio)) as carga_horaria
-        from aula  where id_monitoria = $id_monitoria ) as uniao";
+        $sql = "SELECT TIME_FORMAT(SEC_TO_TIME(SUM(carga_horaria)), '%h : %i') as carga_horaria
+        from ( SELECT ( SUM( time_to_sec(TIMEDIFF(horario_fim,horario_inicio) ))) as carga_horaria
+        from aula where id_monitoria = $id_monitoria UNION SELECT ( SUM( time_to_sec(TIMEDIFF(horario_fim,horario_inicio) )))
+        as carga_horaria from atividade where id_monitoria = $id_monitoria ) as combinacao";
 
 
         $Query = $this->db->query($sql, array($id_monitoria));

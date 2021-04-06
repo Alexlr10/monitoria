@@ -51,8 +51,9 @@ $datatablesPortugueseBrasil = $ci->Util_model->datatablesPortugueseBrasil();
                         </thead>
                         <tbody>
 
-                        <?php foreach ($monitorias as $usuario) { ?>
+
                             <tr>
+                                <?php foreach ($monitorias as  $usuario) { ?>
                                 <td> <?= $usuario->nome ?></td>
                                 <td> <?= $usuario->matricula ?></td>
                                 <td> <?= $usuario->cpf ?></td>
@@ -61,15 +62,9 @@ $datatablesPortugueseBrasil = $ci->Util_model->datatablesPortugueseBrasil();
                                 <td><?= $usuario->agencia ?></td>
                                 <td><?= $usuario->conta ?></td>
                                 <td><?= $usuario->data ?></td>
+                                <td> <?= (int)$usuario->somatorioHorario ?></td>
                                 <td>R$ <?= round(8.33333*(int)$usuario->somatorioHorario) ?></td>
 
-<!--                                    <a href="--><?//= site_url('usuarios/editar_view/' . $usuario->id_usuario) ?><!--">-->
-<!--                                        <span class="glyphicon glyphicon-edit" title="Editar usuario"></span>-->
-<!--                                    </a>-->
-<!--                                    <a href="--><?//= site_url('Usuarios/excluir_usuario_bd/' . $usuario->id_usuario) ?><!--"-->
-<!--                                       onclick="return confirm('Deseja realmente excluir?')"-->
-<!--                                       class="glyphicon glyphicon-trash" title="Excluir usuario"></a>-->
-<!--                                </td>-->
                             </tr>
                         <?php } ?>
                         </tbody>

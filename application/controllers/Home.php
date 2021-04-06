@@ -152,7 +152,9 @@ class Home extends CI_Controller
                             $this->view_home($DATA->id_usuario);
 
                     } else {
-                        $this->index();
+                        $DADOS['msg'] = 'Professor ainda não habilitado no sistema - Solicite habilitação na PROGRAD - DAA';
+                        $this->load->view('login', $DADOS);
+                        //$this->index();
                     }
                 } //caso o usuario digitou um matricula  e uma senha e nao esteja no BD envia uma msg de erro
                 elseif (($containstitucional != null || $senha != null) ) {

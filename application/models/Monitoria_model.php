@@ -381,5 +381,12 @@ class Monitoria_model extends CI_Model
         return $result[0];
     }
 
+    public  function quantMonitoriasRemuneradas(){
+        $sql = "SELECT * from usuario u join monitoria m on m.id_professor = u.id_usuario and m.id_monitoria = $id_monitoria ";
+        $Query = $this->db->query($sql);
+        $result = $Query->result();
+
+        return $result[0];
+    }
 
 }

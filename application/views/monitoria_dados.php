@@ -350,7 +350,7 @@ $id_usuario = $this->session->userdata('id_usuario');
                                             <table id="example1" class="table table-bordered table-striped">
                                                 <thead>
                                                 <tr>
-                                                    <th>Semestre/Ano</th>
+                                                    <th>Semestre/Ano teste</th>
                                                     <th>Data Inicio</th>
                                                     <th>Data Fim</th>
                                                     <th>Ações</th>
@@ -427,6 +427,7 @@ $id_usuario = $this->session->userdata('id_usuario');
     $(function () {
 
         $('#example1').DataTable({
+            'ordering': false
             'language': <?= $datatablesPortugueseBrasil?>
         })
         $('#example2').DataTable({
@@ -434,6 +435,7 @@ $id_usuario = $this->session->userdata('id_usuario');
         })
 
         $('#example3').DataTable({
+            'ordering': false
             'language': <?= $datatablesPortugueseBrasil?>
         })
 

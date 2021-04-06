@@ -48,8 +48,18 @@ class Usuarios extends CI_Controller
 
          //   $DADOS['monitorias'] = $this->Aula_model->getAlunoDadosBancarios();
 
-            $aula['aula'] = $this->Aula_model->getSomatorioAula();
-            $atividade['atividade'] = $this->Aula_model->getSomatorioAtividade();
+//            $DADOS['aula'] = $this->Aula_model->getSomatorioAula();
+//            $DADOS['atividade'] = $this->Aula_model->getSomatorioAtividade();
+           // $DADOS['monitorias'] = $this->Aula_model->getAlunoDadosBancarios();
+//
+//            $teste['monitorias'] = array_merge($this->Aula_model->getSomatorioAula(), $this->Aula_model->getSomatorioAtividade());
+
+           // var_dump($teste);
+
+           // var_dump($dado );
+          //  var_dump($atividade);
+            //var_dump($usuario);
+
 
             for($i = 1; $i <= $quant; $i++){
 
@@ -57,12 +67,12 @@ class Usuarios extends CI_Controller
 
 
             }
-            $DADOS['monitorias'] = $teste;
-            var_dump($DADOS);
+           // $teste['monitorias'] = $DADOS;
 
 
 
-            $this->load->view('planilha/proplan', $DADOS);
+
+            $this->load->view('planilha/proplan', $teste);
         } else {
             $this->Util->telaResultado($this, "Acesso negado.", true);
         }

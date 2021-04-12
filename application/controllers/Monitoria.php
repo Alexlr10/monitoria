@@ -314,6 +314,7 @@ class Monitoria extends CI_Controller
                     $aula->horario_inicio = "";
                     $aula->horario_fim = "";
                     $aula->cadastrado = "";
+                    $aula->observacao = "";
 
                     $DATA['horario'] = $aula;
                 } //recupera as informacoes da aula para editar
@@ -334,14 +335,14 @@ class Monitoria extends CI_Controller
 
         function horario_editar($id_monitoria)
         {
-
-
             $DATA['id_horario_monitoria'] = $this->input->post('id_horario_monitoria');
             $DATA['dia_semana'] = $this->input->post('dia_semana');
             $DATA['horario_inicio'] = $this->input->post('horario_inicio');
             $DATA['horario_fim'] = $this->input->post('horario_fim');
             $DATA['id_monitoria'] = $id_monitoria;
             $DATA['id_local'] = $this->input->post('id_local');
+            $DATA['observacao'] = $this->input->post('observacao');
+
 
             // var_dump($DATA);
             if ($this->Monitoria_model->adicionaEditaHorarioMonitoria($DATA) != 0) {

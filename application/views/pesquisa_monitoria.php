@@ -65,7 +65,15 @@ $this->load->view('header_site'); ?>
                             <th> Local</th>
 
                         </tr>
-                        <?php foreach ($horarios as $horario) { ?>
+                        <?php foreach ($horarios as $horario) {
+                            $observacao_formatado = "";
+                            if ($horario->observacao != "" && strpos($horario->observacao, 'http') !== false )
+                            {$observacao_formatado = "<br/><a href=".$horario->observacao.">".$horario->observacao."</a>";
+                            }
+                            else if ( $horario->observacao != "" ) {
+                                $observacao_formatado = "<br/>".$horario->observacao;
+                            }
+                            ?>
                             <tr>
                                 <td>
                                     <?= $horario->dia_semana ?></a>
@@ -74,7 +82,7 @@ $this->load->view('header_site'); ?>
 
                                 <td><?= date('H:i', strtotime($horario->horario_inicio)) . ' - ' . date('H:i', strtotime($horario->horario_fim)) ?></td>
 
-                                <td><?= $horario->dependencia ?></td>
+                                <td><?= $horario->dependencia . ', ' . $horario->campus . $observacao_formatado ?> </td>
 
                             </tr>
                         <?php } ?>

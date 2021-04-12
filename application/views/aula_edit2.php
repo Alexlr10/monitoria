@@ -141,8 +141,8 @@
 
 
                         <div class="form-group">
-                            <label>Atividade</label>
-                            <input type="text" class="form-control" name="atividades" placeholder="Entre a descrição da atividade realizada" value="<?=$aula->atividades?>">
+                            <label>Atividades</label>
+                            <input type="text" class="form-control" name="atividades" placeholder="Entre com a descrição da atividade realizada" value="<?=$aula->atividades?>">
                         </div>
 
                         <div class="form-group">

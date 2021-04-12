@@ -137,6 +137,20 @@ $datatablesPortugueseBrasil = $ci->Util_model->datatablesPortugueseBrasil();
                                 </select>
                             </div>
 
+                            <div class="form-group">
+                                <label style="margin-bottom: 0px;">Observação</label><br><small style="color: #777;">
+                                    Adicione informações complementares sobre local ou link da plataforma de videoconferecia
+                                    para monitoria on-line</small>
+                                <input type="text" class="form-control" name="observacao"
+                                       placeholder=""
+                                       value="<?= $horario->observacao ?>">
+                            </div>
+
+
+
+
+
+
                         </div>
                         <!-- /.box-body -->
 

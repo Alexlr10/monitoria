@@ -80,7 +80,7 @@ $datatablesPortugueseBrasil = $ci->Util_model->datatablesPortugueseBrasil();
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
-
+            <?php if (strpos("Administrador", $this->session->userdata('perfil')) !== false) {  ?>
             <div class="box table-responsive">
                 <div class="box-header">
                     <h3 class="box-title">Monitores cadastrados</h3>
@@ -118,7 +118,7 @@ $datatablesPortugueseBrasil = $ci->Util_model->datatablesPortugueseBrasil();
                     </table>
                 </div>
                 <!-- /.box-body -->
-
+                <?php } ?>
 
                 <!-- /.box-body -->
             </div>

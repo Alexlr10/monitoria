@@ -137,11 +137,10 @@ join aula au USING(id_monitoria) left join frequencia fr on (a.id_aluno = fr.id_
     public function somatorioCargaHoraria($id_monitoria)
     {
 
-        $sql = "SELECT TIME_FORMAT(SEC_TO_TIME(SUM(carga_horaria)), '%h : %i') as carga_horaria
-        from ( SELECT ( SUM( time_to_sec(TIMEDIFF(horario_fim,horario_inicio) ))) as carga_horaria
-        from aula where id_monitoria = $id_monitoria UNION SELECT ( SUM( time_to_sec(TIMEDIFF(horario_fim,horario_inicio) )))
-        as carga_horaria from atividade where id_monitoria = $id_monitoria ) as combinacao";
-
+        $sql = "SELECT SEC_TO_TIME (SUM(carga_horaria)) as carga_horaria
+        from ( SELECT SUM( time_to_sec(TIMEDIFF(horario_fim,horario_inicio) )) AS carga_horaria
+        FROM aula WHERE id_monitoria = $id_monitoria UNION SELECT  SUM( time_to_sec(TIMEDIFF(horario_fim,horario_inicio) )) AS carga_horaria
+        FROM atividade WHERE id_monitoria =  $id_monitoria ) as combinacao";
 
         $Query = $this->db->query($sql, array($id_monitoria));
         $result = $Query->result();
@@ -152,8 +151,8 @@ join aula au USING(id_monitoria) left join frequencia fr on (a.id_aluno = fr.id_
     public function somatorioHorarioReuniao($id_monitoria)
     {
 
-        $sql = "SELECT DISTINCT  TIME_FORMAT(SUM(TIMEDIFF(horario_fim , horario_inicio)), '%h : %i') as horario_reuniao
-        from atividade  where id_monitoria =" . $id_monitoria;
+        $sql = "SELECT SEC_TO_TIME( SUM( time_to_sec(TIMEDIFF(horario_fim,horario_inicio) ))) AS horario_reuniao
+        FROM atividade WHERE id_monitoria = " . $id_monitoria;
 
         $Query = $this->db->query($sql, array($id_monitoria));
         $result = $Query->result();
@@ -163,8 +162,8 @@ join aula au USING(id_monitoria) left join frequencia fr on (a.id_aluno = fr.id_
     public function somatorioHorarioAula($id_monitoria)
     {
 
-        $sql = "SELECT DISTINCT  TIME_FORMAT(SUM(TIMEDIFF(horario_fim , horario_inicio)), '%h : %i') as horario_aula
-        from aula  where id_monitoria =" . $id_monitoria;
+        $sql = "SELECT SEC_TO_TIME( SUM( time_to_sec(TIMEDIFF(horario_fim,horario_inicio) ))) AS horario_aula
+        FROM aula WHERE id_monitoria = " . $id_monitoria;
 
         $Query = $this->db->query($sql, array($id_monitoria));
         $result = $Query->result();

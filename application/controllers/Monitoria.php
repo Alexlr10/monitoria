@@ -718,16 +718,15 @@ class Monitoria extends CI_Controller
             //Somatorio de carga horaria total sobre atestado de frequência
             $DATA['cargaHorariaAtestadoFrequencia'] = $this->Aula_model->
             somatorioCargaHorariaAtestadoFrequencia($id_monitoria,$DATA['data']->data_inicio, $DATA['data']->data_fim );
+            //var_dump($DATA['cargaHorariaAtestadoFrequencia']);die;
 
             //Somatorio de carga horaria demais atividades sobre atestado de frequência
             $DATA['somatorioReuniaoAtestadoFrequencia'] = $this->Aula_model->
             somatorioHorarioReuniaoAtestadoFrequencia($id_monitoria, $DATA['data']->data_inicio, $DATA['data']->data_fim);
-            //var_dump($DATA['somatorioReuniaoAtestadoFrequencia']);die;
 
             //Somatorio de carga horaria atividades aulas executadas atestado de frequência
             $DATA['somatorioAulaAtestadoFrequencia'] = $this->Aula_model->
             somatorioHorarioAulaAtestadoFrequencia($id_monitoria,$DATA['data']->data_inicio, $DATA['data']->data_fim );
-
 
             //Somatorio de carga horaria atividades aulas executadas
             $DATA['somatorioAula'] = $this->Aula_model->somatorioHorarioAula($id_monitoria);
@@ -740,18 +739,14 @@ class Monitoria extends CI_Controller
             $DATA['monitoria'] = $this->Monitoria_model->profMonitoria($id_monitoria);
             // var_dump($DATA);
 
-
             $DATA['alunos'] = $this->Relatorio_model->alunoFrequencia($id_monitoria);
             $DATA['nome'] = $this->Relatorio_model->alunoNome($id_monitoria);
             $DATA['frequencia'] = $this->Relatorio_model->getContagemFrequencia($id_monitoria);
             // var_dump(    $DATA['contagem']);
 
-
-
             //$this->load->view('relatorios/lista_frequencia', $DATA);
             $this->load->view('relatorios/atestado_frequencia', $DATA);
         }
-
 
         function relatorio_final($id_monitoria, $id_disciplina, $id_atestado_frequencia)
         {

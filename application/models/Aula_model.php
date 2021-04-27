@@ -147,11 +147,10 @@ join aula au USING(id_monitoria) left join frequencia fr on (a.id_aluno = fr.id_
         return $result[0];
     }
 
-
     public function somatorioCargaHorariaAtestadoFrequencia($id_monitoria, $data_inicio, $data_fim)
     {
 
-        $sql = 'SELECT id_monitoria, SEC_TO_TIME(SUM(duracao_sec)) as total_tempo_todas_atividades  FROM
+        $sql = 'SELECT SEC_TO_TIME(SUM(duracao_sec)) as total_tempo_todas_atividades  FROM
         (
         SELECT id_monitoria, `data` as data_atividade, horario_inicio, horario_fim, (TIME_TO_SEC(horario_fim)-TIME_TO_SEC(horario_inicio)) as duracao_sec FROM `atividade`
         UNION
@@ -166,7 +165,10 @@ join aula au USING(id_monitoria) left join frequencia fr on (a.id_aluno = fr.id_
         //var_dump($sql);
         $Query = $this->db->query($sql);
         $result = $Query->result();
-        return $result[0];
+        if( count($result) > 0 )
+            return $result[0]->total_tempo_todas_atividades;
+        else
+            return "00:00:00";
     }
 
     public function somatorioHorarioReuniao($id_monitoria)
@@ -194,7 +196,10 @@ join aula au USING(id_monitoria) left join frequencia fr on (a.id_aluno = fr.id_
         //var_dump($sql);
         $Query = $this->db->query($sql);
         $result = $Query->result();
-        return $result[0];
+        if( count($result) > 0 )
+            return $result[0]->total_tempo_atividades;
+        else
+            return "00:00:00";
     }
 
 
@@ -211,7 +216,10 @@ join aula au USING(id_monitoria) left join frequencia fr on (a.id_aluno = fr.id_
         //var_dump($sql);
         $Query = $this->db->query($sql);
         $result = $Query->result();
-        return $result[0];
+        if( count($result) > 0 )
+            return $result[0]->total_tempo_aulas;
+        else
+            return "00:00:00";
     }
 
 

@@ -76,27 +76,17 @@ $htmlStr .= '
 </table>
 ';
 
-//Tratar erro caso nao tenha registro de horarios
-if ($somatorioReuniao->horario_reuniao==null){
-    $somatorioReuniao->horario_reuniao = 0;
-}
-if($somatorioAula->horario_aula==null){
-    $somatorioAula->horario_aula = 0;
-}
 
-if($cargaHoraria->carga_horaria==null){
-    $cargaHoraria->carga_horaria = 0;
-}
-
+//var_dump($somatorioReuniaoAtestadoFrequencia).die;
 
 // Monta o final
 $htmlStr .= '
 <br/> <br/>
 <p>
     Declaro que o monitor acima citado cumpriu
-    <b>'. str_replace (' ','',substr( $somatorioReuniaoAtestadoFrequencia->total_tempo_atividades, 0, -3)) .'</b> hora(s) demais atividades
-    e <b>'. str_replace (' ','',substr( $somatorioAulaAtestadoFrequencia->total_tempo_aulas, 0, -3)) .'</b> hora(s) de atividade monitoria,
-    totalizando <b>'. str_replace (' ','',substr( $cargaHorariaAtestadoFrequencia->total_tempo_todas_atividades, 0, -3)) .'</b>
+    <b>'. str_replace (' ','',substr( $somatorioReuniaoAtestadoFrequencia, 0, -3)) .'</b> hora(s) demais atividades
+    e <b>'. str_replace (' ','', substr( $somatorioAulaAtestadoFrequencia, 0, -3)) .'</b> hora(s) de atividade monitoria,
+    totalizando <b>'. str_replace (' ','',substr( $cargaHorariaAtestadoFrequencia, 0, -3)) .'</b>
     hora(s) de atividade de monitoria no périodo de '. date("d/m/Y", strtotime($data->data_inicio)) .' a '. date("d/m/Y", strtotime($data->data_fim)) .'
 </p>
 <br/>

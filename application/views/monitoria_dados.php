@@ -43,9 +43,9 @@ $id_usuario = $this->session->userdata('id_usuario');
                     <p><b>Curso:</b> <?= $monitoria->curso ?>  </p>
                     <p><b>Professor:</b> <?= $monitoria->professor ?>  </p>
                     <p><b>Monitor:</b> <?= $monitoria->monitor ?>  </p>
-                    <p><b>Horas aulas realizadas:</b> <?= $somatorioAula->horario_aula ?></p>
-                    <p><b>Horas demais atividades:</b> <?= $somatorioReuniao->horario_reuniao ?></p>
-                    <p><b>Carga horária total:</b> <?= $cargaHoraria->carga_horaria ?></p>
+                    <p><b>Horas aulas realizadas:</b> <?= substr( $somatorioAula->horario_aula, 0, -3); ?></p>
+                    <p><b>Horas demais atividades:</b> <?=substr( $somatorioReuniao->horario_reuniao, 0, -3);  ?></p>
+                    <p><b>Carga horária total:</b> <?= substr( $cargaHoraria->carga_horaria, 0, -3); ?></p>
                     <p><b>Semestre:</b> <?= $monitoria->periodo ?>  </p>
 
                     <hr/>

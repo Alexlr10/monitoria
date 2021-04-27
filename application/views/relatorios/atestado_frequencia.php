@@ -94,9 +94,9 @@ $htmlStr .= '
 <br/> <br/>
 <p>
     Declaro que o monitor acima citado cumpriu
-    <b>'. str_replace (' ','',$somatorioReuniao->horario_reuniao) .'</b> hora(s) demais atividades
-    e <b>'. str_replace (' ','',$somatorioAula->horario_aula) .'</b> hora(s) de atividade monitoria,
-    totalizando <b>'. str_replace (' ','',$cargaHoraria->carga_horaria) .'</b>
+    <b>'. str_replace (' ','',substr( $somatorioReuniaoAtestadoFrequencia->total_tempo_atividades, 0, -3)) .'</b> hora(s) demais atividades
+    e <b>'. str_replace (' ','',substr( $somatorioAulaAtestadoFrequencia->total_tempo_aulas, 0, -3)) .'</b> hora(s) de atividade monitoria,
+    totalizando <b>'. str_replace (' ','',substr( $cargaHorariaAtestadoFrequencia->total_tempo_todas_atividades, 0, -3)) .'</b>
     hora(s) de atividade de monitoria no périodo de '. date("d/m/Y", strtotime($data->data_inicio)) .' a '. date("d/m/Y", strtotime($data->data_fim)) .'
 </p>
 <br/>

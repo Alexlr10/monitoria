@@ -148,6 +148,27 @@ join aula au USING(id_monitoria) left join frequencia fr on (a.id_aluno = fr.id_
     }
 
 
+    public function somatorioCargaHorariaAtestadoFrequencia($id_monitoria, $data_inicio, $data_fim)
+    {
+
+        $sql = 'SELECT id_monitoria, SEC_TO_TIME(SUM(duracao_sec)) as total_tempo_todas_atividades  FROM
+        (
+        SELECT id_monitoria, `data` as data_atividade, horario_inicio, horario_fim, (TIME_TO_SEC(horario_fim)-TIME_TO_SEC(horario_inicio)) as duracao_sec FROM `atividade`
+        UNION
+        SELECT id_monitoria, `data` as data_atividade, horario_inicio, horario_fim, (TIME_TO_SEC(horario_fim)-TIME_TO_SEC(horario_inicio)) as duracao_sec FROM `aula`
+        ) as todas_atividades
+        WHERE
+        id_monitoria ='.$id_monitoria.'
+        AND  data_atividade >= "'.$data_inicio.'"
+        AND data_atividade <= "'.$data_fim.'"
+        GROUP BY
+        id_monitoria';
+        //var_dump($sql);
+        $Query = $this->db->query($sql);
+        $result = $Query->result();
+        return $result[0];
+    }
+
     public function somatorioHorarioReuniao($id_monitoria)
     {
 
@@ -158,6 +179,41 @@ join aula au USING(id_monitoria) left join frequencia fr on (a.id_aluno = fr.id_
         $result = $Query->result();
         return $result[0];
     }
+
+    public function somatorioHorarioReuniaoAtestadoFrequencia($id_monitoria, $data_inicio, $data_fim)
+    {
+
+        $sql = 'SELECT id_monitoria, SEC_TO_TIME(SUM(duracao_sec)) as total_tempo_atividades  FROM
+        (SELECT id_monitoria, `data` as data_atividade, horario_inicio, horario_fim, (TIME_TO_SEC(horario_fim)-TIME_TO_SEC(horario_inicio)) as duracao_sec FROM `atividade`) as todas_atividades
+        WHERE
+        id_monitoria ='.$id_monitoria.'
+        AND  data_atividade >= "'.$data_inicio.'"
+        AND data_atividade <= "'.$data_fim.'"
+        GROUP BY
+        id_monitoria';
+        //var_dump($sql);
+        $Query = $this->db->query($sql);
+        $result = $Query->result();
+        return $result[0];
+    }
+
+
+    public function somatorioHorarioAulaAtestadoFrequencia($id_monitoria, $data_inicio, $data_fim)
+    {
+        $sql = 'SELECT id_monitoria, SEC_TO_TIME(SUM(duracao_sec)) as total_tempo_aulas  FROM
+        (SELECT id_monitoria, `data` as data_atividade, horario_inicio, horario_fim, (TIME_TO_SEC(horario_fim)-TIME_TO_SEC(horario_inicio)) as duracao_sec FROM `aula`) as todas_atividades
+        WHERE
+        id_monitoria ='.$id_monitoria.'
+        AND  data_atividade >= "'.$data_inicio.'"
+        AND data_atividade <= "'.$data_fim.'"
+        GROUP BY
+        id_monitoria';
+        //var_dump($sql);
+        $Query = $this->db->query($sql);
+        $result = $Query->result();
+        return $result[0];
+    }
+
 
     public function somatorioHorarioAula($id_monitoria)
     {

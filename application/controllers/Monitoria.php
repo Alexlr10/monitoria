@@ -699,6 +699,10 @@ class Monitoria extends CI_Controller
 
             $PERFIL_USUARIO = "Administrador";
 
+
+            //Model que pega as informações de datas iniciais e finais de atestado de frequencia para geração de relatório
+            $DATA['data'] = $this->Relatorio_model->dataInicioFim($id_atestado_frequencia);
+
             //Listar nome de Monitores e Numero de  Edital
             $DATA['monitores'] = $this->Usuario_model->getMonitorById($id_monitoria);
             //Listar Nome da disciplina e Unidade Curricular
@@ -707,8 +711,23 @@ class Monitoria extends CI_Controller
             //Somatorio de carga horaria total do monitor
             $DATA['cargaHoraria'] = $this->Aula_model->somatorioCargaHoraria($id_monitoria);
 
+            //var_dump($DATA['data']->data_inicio);die;
             //Somatorio de carga horaria demais atividades
             $DATA['somatorioReuniao'] = $this->Aula_model->somatorioHorarioReuniao($id_monitoria);
+
+            //Somatorio de carga horaria total sobre atestado de frequência
+            $DATA['cargaHorariaAtestadoFrequencia'] = $this->Aula_model->
+            somatorioCargaHorariaAtestadoFrequencia($id_monitoria,$DATA['data']->data_inicio, $DATA['data']->data_fim );
+
+            //Somatorio de carga horaria demais atividades sobre atestado de frequência
+            $DATA['somatorioReuniaoAtestadoFrequencia'] = $this->Aula_model->
+            somatorioHorarioReuniaoAtestadoFrequencia($id_monitoria, $DATA['data']->data_inicio, $DATA['data']->data_fim);
+            //var_dump($DATA['somatorioReuniaoAtestadoFrequencia']);die;
+
+            //Somatorio de carga horaria atividades aulas executadas atestado de frequência
+            $DATA['somatorioAulaAtestadoFrequencia'] = $this->Aula_model->
+            somatorioHorarioAulaAtestadoFrequencia($id_monitoria,$DATA['data']->data_inicio, $DATA['data']->data_fim );
+
 
             //Somatorio de carga horaria atividades aulas executadas
             $DATA['somatorioAula'] = $this->Aula_model->somatorioHorarioAula($id_monitoria);
@@ -728,8 +747,6 @@ class Monitoria extends CI_Controller
             // var_dump(    $DATA['contagem']);
 
 
-            //Model que pega as informações de datas iniciais e finais de atestado de frequencia para geração de relatório
-            $DATA['data'] = $this->Relatorio_model->dataInicioFim($id_atestado_frequencia);
 
             //$this->load->view('relatorios/lista_frequencia', $DATA);
             $this->load->view('relatorios/atestado_frequencia', $DATA);

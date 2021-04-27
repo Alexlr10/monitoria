@@ -30,7 +30,7 @@ $datatablesPortugueseBrasil = $ci->Util_model->datatablesPortugueseBrasil();
 
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Atestados de Frequência Cadastrados</h3>
+                    <h3 class="box-title">Atestados de Frequência Cadastradosss</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

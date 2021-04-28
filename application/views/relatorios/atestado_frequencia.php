@@ -59,6 +59,9 @@ $htmlStr .= '
 <table id="customers">
   <tr>
     <th>Data da Monitoria</th>
+    <th>Tipo</th>
+    <th>Descrição</th>
+    <th>Duração</th>
     <th>Quant. Alunos</th>
   </tr>
 ';
@@ -67,7 +70,10 @@ foreach ($frequencia as $aluno) {
     $htmlStr .= '
       <tr>
         <td>'.date("d/m/Y", strtotime($aluno->data )).'</td>
-        <td>'.$aluno->quant.'</td>
+        <td>'.$aluno->tipo.'</td>
+        <td>'.$aluno->descrição.'</td>
+        <td>'.$aluno->duracao.'</td>
+        <td>'.$aluno->quant_alunos.'</td>
       </tr>
     ';
 }
@@ -77,9 +83,6 @@ $htmlStr .= '
 ';
 
 
-//var_dump($somatorioReuniaoAtestadoFrequencia).die;
-
-// Monta o final
 $htmlStr .= '
 <br/> <br/>
 <p>
@@ -99,9 +102,6 @@ ___________________________________________________<br/>
 Professor(a) Supervisor(a) da Monitoria /Nº SIAPE
 </p>
 ';
-
-
-
 
 //Criando a Instancia
 $dompdf = new DOMPDF();

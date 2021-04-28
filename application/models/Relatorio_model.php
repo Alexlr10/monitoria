@@ -163,8 +163,35 @@ FROM atestado_frequencia a join periodo p where a.id_periodo = p.id_periodo";
 
         return($result);
 
-
     }
+
+    public function  getContagemCargaHoraria($id_monitoria, $data_inicio, $data_fim){
+
+        $sql = "(
+        SELECT id_monitoria, 'Monitoria' as tipo, `data`,  atividades as descrição, SEC_TO_TIME(TIME_TO_SEC(horario_fim)-TIME_TO_SEC(horario_inicio)) as duracao, COUNT(id_aluno) as quant_alunos FROM `aula`
+        LEFT JOIN frequencia using(id_aula)
+        WHERE
+        id_monitoria = $id_monitoria
+        AND DATA >= '$data_inicio'
+        AND DATA <= '$data_fim'
+        GROUP BY
+        `data`, horario_fim, descrição, horario_inicio, id_monitoria, duracao
+        )
+        UNION
+        (
+        SELECT id_monitoria, 'Atividade' as tipo, `data`, descricao, SEC_TO_TIME(TIME_TO_SEC(horario_fim)-TIME_TO_SEC(horario_inicio)) as duracao, '-' as quant_alunos FROM `atividade`
+        WHERE
+        id_monitoria = $id_monitoria
+        AND DATA >= '$data_inicio'
+        AND DATA <= '$data_fim'
+        )";
+        $query = $this->db->query($sql);
+        $result = $query->result();
+
+        return($result);
+    }
+
+
     //Função para mostrar data inicio e fim para colocar dentro do relatório de atestado de frequência
     public function dataInicioFim($id_atestado_frequencia){
         $sql ="select id_atestado_frequencia, data_inicio, data_fim from atestado_frequencia where id_atestado_frequencia = $id_atestado_frequencia";

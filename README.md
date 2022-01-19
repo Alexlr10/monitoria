@@ -183,12 +183,12 @@ docker exec -it apache-monitoria bash
 ### Testes
 
 * Servidor web: [monitoria.apps-teste.ufvjm.edu.br](https://monitoria.apps-teste.ufvjm.edu.br)
-* PHPMyAdmin: [pma-appgin.apps-teste.ufvjm.edu.br](https://pma-monitoria.apps-teste.ufvjm.edu.br)
+* PHPMyAdmin: [pma-monitoria.apps-teste.ufvjm.edu.br](https://pma-monitoria.apps-teste.ufvjm.edu.br)
 
 ### Produção
 
 * Servidor web: [monitoria.prograd.ufvjm.edu.br](https://monitoria.prograd.ufvjm.edu.br)
-* PHPMyAdmin: [pma-selecao.prograd.ufvjm.edu.br](https://pma-monitoria.prograd.ufvjm.edu.br)
+* PHPMyAdmin: [pma-monitoria.prograd.ufvjm.edu.br](https://pma-monitoria.prograd.ufvjm.edu.br)
 
 ## Desinstalação
 
